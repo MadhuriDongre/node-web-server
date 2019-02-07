@@ -3,6 +3,7 @@ const app = express();
 const hbs= require('hbs');
 const fs = require('fs');
 
+const port = process.env.PORT || 3000;
 hbs.registerPartials(__dirname+'/views/partials'); //support for partials in hbs (works with HTML Partial code)
 hbs.registerHelper('getCurrentYear',()=>{
     return new Date().getFullYear();
@@ -23,12 +24,12 @@ app.use((req,res,next)=>{
    next();
 });//middleware should call next() to run the application without hanging
 
-app.use((req,res,next)=>{
-    res.render("maintenance.hbs", {
-      pageTitle: "Under Maintenance"
-    });
-    //did not add 'next' so next code is not gonna get executed...
-});
+// app.use((req,res,next)=>{
+//     res.render("maintenance.hbs", {
+//       pageTitle: "Under Maintenance"
+//     });
+//     //did not add 'next' so next code is not gonna get executed...
+// });
 
 app.use(express.static(__dirname+'/public'));//register middleware with express
 
@@ -61,6 +62,6 @@ app.get('/bad',(req,res)=>{
 });
 
 //bind application to the port on machine
-app.listen(3000,()=>{
-    console.log('Server is up on port 3000');
+app.listen(port, () => {
+  console.log(`Server is up on port ${port} `);
 });
