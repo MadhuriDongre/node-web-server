@@ -55,6 +55,13 @@ app.get('/about',(req,res)=>{
     });  //render the template page on UI
 });
 
+app.get("/projects", (req, res) => {
+  // res.send('About Page');
+  res.render("projects.hbs", {
+    pageTitle: "Projects Page"
+  }); //render the template page on UI
+});
+
 app.get('/bad',(req,res)=>{
     res.send({
       errorMessage: "Handling Bad Requests and Errors"
